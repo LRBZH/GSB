@@ -1,5 +1,5 @@
-<?php
-echo"
+<?php 
+echo "
 <h3>Ajouter un nouveau frais hors forfait</h3>
 <form method='POST' action='index.php?uc=gererFrais&action=validerCreationFrais'>
 <table class='tabNonQuadrille'>
@@ -12,7 +12,7 @@ echo"
 <tr>
 	<td>Description du frais</td>
 	<td>
-		<input  type='text' name=description  size='50' maxlength='100'>
+		<input  type='text' name=libelle  size='50' maxlength='100'>
 	</td>
 </tr>
 <tr>
@@ -36,5 +36,5 @@ echo"
          <input type='reset' value='Annuler' name='annuler'>
 
 </form>
-";
+"
 ?>

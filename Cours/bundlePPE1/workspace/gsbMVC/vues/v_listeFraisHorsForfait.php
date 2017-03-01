@@ -30,7 +30,7 @@
 	?>	  
                                           
     </table>
-      <form action="index.php?uc=gererFrais&action=validerCreationFrais" method="post">
+      <form method="POST" action="index.php?uc=gererFrais&action=validerCreationFrais">
       <div class="corpsForm">
          
           <fieldset>
@@ -39,7 +39,6 @@
             <p>
               <label for="txtDateHF">Date (jj/mm/aaaa): </label>
               <input type="text" id="txtDateHF" name="dateFrais" size="10" maxlength="10" value=""  />
-            </p>
             <p>
               <label for="txtLibelleHF">Libellé</label>
               <input type="text" id="txtLibelleHF" name="libelle" size="70" maxlength="256" value="" />
