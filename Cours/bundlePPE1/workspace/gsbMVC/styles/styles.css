@@ -12,7 +12,7 @@ body{
   background-color:white;
   width : 65%;
   margin : auto ;
-  border : 0.2em solid black;
+  border : 0.2em solid white;
   padding : 0.1em;
 }
 #entete{
@@ -25,7 +25,7 @@ body{
 }
 #pied{
   clear : both;
-	border : solid 0.2em #980101;
+	border : solid 0.2em /* #980101 */;
 	margin-left : 18%;
 	margin-top : 1em;
 	padding:0.4em;
@@ -46,7 +46,7 @@ body{
 	padding: 1.3em;
 	background-color: white;
 	border-left :  groove 0.8em #980101;
-  margin-top : 1.2em;
+ 	margin-top : 1.2em;
 	margin-left: 18%;
 /* permet de fixer une hauteur mini sur les navigateurs modernes */
   min-height:27em;
@@ -190,7 +190,10 @@ taille de caract�res l�g�rement sup�rieure � la normale */
 
 .encadre {
   border : solid 0.1em #000;
-  width : 95%;
+  width : 80%;
+  background-color: #77AADD;
+  float:left;
+  color:white;
 }
 /* Style pour les liens de la page principale */
 #contenu .corpsTexte {
@@ -217,9 +220,9 @@ taille de caract�res l�g�rement sup�rieure � la normale */
 
 /* Styles pour les tableaux de la page principale */
 #contenu table {
-   background-color:#FFF;
+   background-color:#77AADD;
    border : 0.1em solid #777777;
-   color:black;
+   color : white;
    margin-right : auto ;
    margin-left:0.3em;
    border-collapse : collapse;
@@ -244,8 +247,11 @@ taille de caract�res l�g�rement sup�rieure � la normale */
     font-size : 1.2em;
 }
 table.listeLegere {
-/*    width:80%;*/
+	width:80%; 
     margin-bottom : 0.5em;
+    background-color: #77AADD;
+    color : white;
+    
 }
 
 /* Tableaux quadrill�s utilis�s pour l'affichage de listes avec contenu l�ger*/ 
@@ -266,20 +272,20 @@ table.listeLegere td {
   font-weight:normal;
 }
 table.listeLegere th.eltForfait{
-  color:black;
+  color:white;
 }
 table.listeLegere th.date, table.listeLegere th.montant{
   width:15%;
-  color:black;
+  color:white;
 }
 table.listeLegere th.libelle{
   width:70%;
-  color:black;
+  color:white;
 }
 
 #contenu h2 {
 	font-family: Verdana, Arial, Helvetica, sans-serif;
-	font-size: 14px;
+	font-size: 16px;
 	font-weight: bold;
 	color: #1D2941;
 	text-decoration: none;
@@ -294,3 +300,49 @@ table.listeLegere th.libelle{
   float : left;
 
 }
+
+.visiteur {
+	background-color: #77AADD;
+	float:left;
+	width:80%;
+	margin : 10 10 10 10;
+	color:white;
+	height:88%;
+}
+/* *****************************Partie comptable ****************************************/
+/*Classe pour la partie comptable avec la couleur fournie dans les ébauches de formulaires*/
+.comptable {
+	float:left;
+	width:80%;
+	margin : 10 10 10 10;
+	background-color:EE8844;
+	color:white;
+	height:88%;
+}
+
+.comptable titre {
+	width : 180;
+	float:left;
+}
+
+.comptable table {
+	color:white;
+	border:1;
+}
+
+
+.lstVisiteur {
+	
+}
+
+.lstFrais {
+	color : white;
+	border : 1;
+}
+
+.lstFrais.td{;
+	width : 80;
+}
+
+
+

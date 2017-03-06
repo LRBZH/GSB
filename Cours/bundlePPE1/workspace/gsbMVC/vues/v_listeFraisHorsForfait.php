@@ -1,5 +1,5 @@
 ﻿
-<table class="listeLegere">
+<table class="listeLegere" border="1">
   	   <caption>Descriptif des éléments hors forfait
        </caption>
              <tr>
@@ -33,9 +33,9 @@
       <form method="POST" action="index.php?uc=gererFrais&action=validerCreationFrais">
       <div class="corpsForm">
          
-          <fieldset>
-            <legend>Nouvel élément hors forfait
-            </legend>
+<!--           <fieldset> -->
+            <caption>Nouvel élément hors forfait
+            </caption>
             <p>
               <label for="txtDateHF">Date (jj/mm/aaaa): </label>
               <input type="text" id="txtDateHF" name="dateFrais" size="10" maxlength="10" value=""  />
@@ -47,7 +47,7 @@
               <label for="txtMontantHF">Montant : </label>
               <input type="text" id="txtMontantHF" name="montant" size="10" maxlength="10" value="" />
             </p>
-          </fieldset>
+<!--           </fieldset> -->
       </div>
       <div class="piedForm">
       <p>
@@ -57,6 +57,7 @@
       </div>
         
       </form>
+      </div> 
   </div>
   
 

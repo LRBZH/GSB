@@ -1,12 +1,13 @@
 <div id="contenu">
+	<div class="visiteur">
       <h2>Renseigner ma fiche de frais du mois <?php echo $numMois."-".$numAnnee ?></h2>
          
       <form method="POST"  action="index.php?uc=gererFrais&action=validerMajFraisForfait">
-      <div class="corpsForm">
+      <div class="corpsForm" class="visiteur">
           
-          <fieldset>
-            <legend>Eléments forfaitisés
-            </legend>
+<!--           <fieldset> -->
+            <caption>Eléments forfaitisés
+            </caption>
 			<?php
 				foreach ($lesFraisForfait as $unFrais)
 				{
@@ -22,12 +23,8 @@
 			<?php
 				}
 			?>
-			
-			
-			
-			
-           
-          </fieldset>
+			     
+<!--           </fieldset> -->
       </div>
       <div class="piedForm">
       <p>
@@ -35,6 +32,7 @@
         <input id="annuler" type="reset" value="Effacer" size="20" />
       </p> 
       </div>
-        
+       
       </form>
+      
   

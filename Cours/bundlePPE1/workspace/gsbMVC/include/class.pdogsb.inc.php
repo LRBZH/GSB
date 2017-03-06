@@ -18,8 +18,8 @@
 class PdoGsb{   		
       	private static $serveur='mysql:host=localhost';
       	private static $bdd='dbname=gsbV2';   		
-      	private static $user='nymroe' ;    		
-      	private static $mdp='Mybutt00' ;	
+      	private static $user='comptable' ;    		
+      	private static $mdp='comptable35' ;	
 		private static $monPdo;
 		private static $monPdoGsb=null;
 /**
@@ -46,6 +46,7 @@ class PdoGsb{
 		}
 		return PdoGsb::$monPdoGsb;  
 	}
+//********************************** GESTION VISITEURS ***************************************************************
 /**
  * Retourne les informations d'un visiteur
  
@@ -106,6 +107,9 @@ class PdoGsb{
  * @return l'id, le libelle et la quantité sous la forme d'un tableau associatif 
 */
 	public function getLesFraisForfait($idVisiteur, $mois){
+		echo "entrée dans getLesFraisForfait"." ";
+		echo "visiteur : ".$idVisiteur." ";
+		echo "mois : ".$mois." ";
 		$req = "select FraisForfait.id as idFrais, FraisForfait.libelle as libelle, 
 		LigneFraisForfait.quantite as quantite from LigneFraisForfait inner join FraisForfait 
 		on FraisForfait.id = LigneFraisForfait.idFraisForfait
@@ -113,6 +117,7 @@ class PdoGsb{
 		order by LigneFraisForfait.idFraisForfait";	
 		$res = PdoGsb::$monPdo->query($req);
 		$lesLignes = $res->fetchAll();
+		echo "lesLignes[0] : ".$lesLignes[0];
 		return $lesLignes; 
 	}
 /**
@@ -297,5 +302,51 @@ class PdoGsb{
 		where FicheFrais.idVisiteur ='$idVisiteur' and FicheFrais.mois = '$mois'";
 		PdoGsb::$monPdo->exec($req);
 	}
+
+//-------------------------------------- GESTION COMPTABLES ---------------------------------------------
+	/**
+	 * Récupère les informations du comptable
+	 * @param $login
+	 * @param $mdp
+	 * @return l'id, le nom et le prénom du comptable
+	 */
+	public function getInfosComptable($login, $mdp){
+		$req = "select Comptable.id as id, Comptable.nom as nom, Comptable.prenom as prenom from Comptable
+		where Comptable.login='$login' and Comptable.mdp='$mdp'";
+		$rs = PdoGsb::$monPdo->query($req);
+		$ligne = $rs->fetch();
+		return $ligne;
+	}
+	
+	/**
+	 * Récupère la liste des visiteurs dans la base
+	 * @return la liste des visiteurs
+	 */
+	public function getLesVisiteurs(){
+		$req = "select Visiteur.id, Visiteur.nom, Visiteur.prenom from Visiteur";
+		$res = PdoGsb::$monPdo->query($req);
+		$lesLignes = $res->fetchAll();
+		return $lesLignes;
+		
+	}
+	/**
+	 * Récupère le visiteur dont l'id est passé en paramètre (pour affichage des nom et prénom)
+	 * @param $idVisiteur
+	 * @return les infos du visiteur concerné (tableau associatif)
+	 */
+	public function getLeVisiteur($idVisiteur){
+		$req = "select Visiteur.id, Visiteur.nom, Visiteur.prenom from Visiteur
+				where Visiteur.id = '$idVisiteur' ";
+		$res = PdoGsb::$monPdo->query($req);
+		$laLigne = $res->fetch();
+		"echo requete OK";
+		return $laLigne;
+		
+	}
+	
+	
+	
+	
+	
 }
 ?>

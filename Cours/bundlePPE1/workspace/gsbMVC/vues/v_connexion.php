@@ -1,5 +1,6 @@
 ﻿<div id="contenu">
-      <h2>Identification utilisateur</h2>
+      <h2>Bienvenue sur GSB - Application de suivi de frais des visiteurs médicaux</h2>
+      <p>Veuillez vous connecter : </p>
 
 
 <form method="POST" action="index.php?uc=connexion&action=valideConnexion">
