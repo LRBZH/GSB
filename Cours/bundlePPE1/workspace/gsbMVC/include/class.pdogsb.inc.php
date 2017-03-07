@@ -107,9 +107,6 @@ class PdoGsb{
  * @return l'id, le libelle et la quantité sous la forme d'un tableau associatif 
 */
 	public function getLesFraisForfait($idVisiteur, $mois){
-		echo "entrée dans getLesFraisForfait"." ";
-		echo "visiteur : ".$idVisiteur." ";
-		echo "mois : ".$mois." ";
 		$req = "select FraisForfait.id as idFrais, FraisForfait.libelle as libelle, 
 		LigneFraisForfait.quantite as quantite from LigneFraisForfait inner join FraisForfait 
 		on FraisForfait.id = LigneFraisForfait.idFraisForfait
@@ -117,7 +114,6 @@ class PdoGsb{
 		order by LigneFraisForfait.idFraisForfait";	
 		$res = PdoGsb::$monPdo->query($req);
 		$lesLignes = $res->fetchAll();
-		echo "lesLignes[0] : ".$lesLignes[0];
 		return $lesLignes; 
 	}
 /**

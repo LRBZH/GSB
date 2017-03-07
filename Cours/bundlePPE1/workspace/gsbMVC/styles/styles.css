@@ -317,7 +317,7 @@ table.listeLegere th.libelle{
 	margin : 10 10 10 10;
 	background-color:EE8844;
 	color:white;
-	height:88%;
+	height:100%;
 }
 
 .comptable titre {
@@ -326,13 +326,9 @@ table.listeLegere th.libelle{
 }
 
 .comptable table {
-	color:white;
-	border:1;
-}
-
-
-.lstVisiteur {
-	
+	color : white;
+	border : 1;
+	width : 100%;
 }
 
 .lstFrais {
@@ -340,9 +336,16 @@ table.listeLegere th.libelle{
 	border : 1;
 }
 
-.lstFrais.td{;
+.inputSmall {
 	width : 80;
+	float : center;
 }
 
+.comptable tr {
+	float : center;
+}
 
-
+.inputLarge {
+	width : 160;
+	float : center;
+}
