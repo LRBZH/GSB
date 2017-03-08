@@ -27,7 +27,7 @@ class PdoGsb{
  * pour toutes les méthodes de la classe
  */				
 	private function __construct(){
-    	PdoGsb::$monPdo = new PDO(PdoGsb::$serveur.';'.PdoGsb::$bdd, PdoGsb::$user, PdoGsb::$mdp); 
+		PdoGsb::$monPdo = new PDO(PdoGsb::$serveur.';'.PdoGsb::$bdd, PdoGsb::$user, PdoGsb::$mdp); 
 		PdoGsb::$monPdo->query("SET CHARACTER SET utf8");
 	}
 	public function _destruct(){
@@ -159,7 +159,7 @@ class PdoGsb{
 	public function majNbJustificatifs($idVisiteur, $mois, $nbJustificatifs){
 		$req = "update FicheFrais set nbJustificatifs = $nbJustificatifs 
 		where FicheFrais.idVisiteur = '$idVisiteur' and FicheFrais.mois = '$mois'";
-		PdoGsb::$monPdo->exec($req);	
+		PdoGsb::$monPdo->exec($req);
 	}
 /**
  * Teste si un visiteur possède une fiche de frais pour le mois passé en argument
@@ -361,7 +361,17 @@ class PdoGsb{
 		return $laLigne;
 	}
 	
-	
-	
+	/**
+	 * Récupère la liste des états pour affichage côté comptable
+	 * @return les différents états possibles
+	 */
+	public function getLesEtats(){ 
+		$req = "SELECT * FROM Etat";
+		$res = PdoGsb::$monPdo->query($req);
+		$lesLignes = $res->fetchAll();
+		return $lesLignes;
+	}
+	 
+
 }
 ?>
