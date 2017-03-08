@@ -238,13 +238,13 @@ class PdoGsb{
 	}
 /**
  * Supprime le frais hors forfait dont l'id est passé en argument
- 
  * @param $idFrais 
 */
 	public function supprimerFraisHorsForfait($idFrais){
 		$req = "delete from LigneFraisHorsForfait where LigneFraisHorsForfait.id =$idFrais ";
 		PdoGsb::$monPdo->exec($req);
 	}
+	
 /**
  * Retourne les mois pour lesquel un visiteur a une fiche de frais
  
@@ -335,12 +335,31 @@ class PdoGsb{
 				where Visiteur.id = '$idVisiteur' ";
 		$res = PdoGsb::$monPdo->query($req);
 		$laLigne = $res->fetch();
-		"echo requete OK";
 		return $laLigne;
 		
 	}
 	
+	/**
+	 * Modifie le libellé du frais hors forfait dont l'id est passé en argument
+	 * @param $idFrais
+	 */
+	public function refuserFraisHorsForfait($idFrais, $message){
+		$req = "UPDATE LigneFraisHorsForfait SET libelle = '$message' where LigneFraisHorsForfait.id ='$idFrais' ";
+		PdoGsb::$monPdo->exec($req);
+	}
 	
+	/**
+	 * Récupère le frais HF à modifier
+	 * @param $idFrais
+	 * @return le frais HF
+	 */
+	public function getLibelleFraisHorsForfaitById($idFrais){
+		$req = "SELECT * FROM LigneFraisHorsForfait where LigneFraisHorsForfait.id ='$idFrais' ";
+		$res = PdoGsb::$monPdo->query($req);
+		$laLigne = $res->fetch();
+		
+		return $laLigne;
+	}
 	
 	
 	

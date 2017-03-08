@@ -337,7 +337,7 @@ table.listeLegere th.libelle{
 }
 
 .inputSmall {
-	width : 80;
+	width : 70;
 	float : center;
 }
 
@@ -348,4 +348,8 @@ table.listeLegere th.libelle{
 .inputLarge {
 	width : 160;
 	float : center;
+}
+
+a {
+	color : white;
 }
