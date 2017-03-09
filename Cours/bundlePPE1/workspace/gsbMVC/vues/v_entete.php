@@ -12,6 +12,6 @@
       <div id="entete">
         <img src="./images/logo.jpg" id="logoGSB" alt="Laboratoire Galaxy-Swiss Bourdin" title="Laboratoire Galaxy-Swiss Bourdin" />
         <br />
-        <br />
-        <h1>Suivi du remboursement des frais</h1>
+        <h1>GSB - Laboratoire Galaxy-Swiss Bourdin </h1>
+        <h1>Suivi du remboursement des frais des visiteurs médicaux</h1>
       </div>

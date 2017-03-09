@@ -9,23 +9,22 @@ body{
   font-size:0.8em;
 }
 #page {
-  background-color:white;
-  width : 65%;
+  background-color: #77AADD;
+  width : 80%;
   margin : auto ;
-  border : 0.2em solid white;
   padding : 0.1em;
 }
 #entete{
-  background-color:rgb(72,198,236);
+  	background-color : #77AADD;
 	color : #980101;
-	border: solid 0.1em #980101;
+	border: solid 0.1em white;
 	height: 154px;
 	padding: 0em;
 	border-collapse: separate;
 }
 #pied{
   clear : both;
-	border : solid 0.2em /* #980101 */;
+/* 	border : solid 0.2em #980101; */
 	margin-left : 18%;
 	margin-top : 1em;
 	padding:0.4em;
@@ -39,13 +38,14 @@ body{
 	color: rgb(0,85,227);
 	float: left;
 	width: 14%;
+	height : 96%;
 }
 
 #contenu{
 	border: none;
 	padding: 1.3em;
-	background-color: white;
-	border-left :  groove 0.8em #980101;
+	background-color: #77AADD;
+	color : white;
  	margin-top : 1.2em;
 	margin-left: 18%;
 /* permet de fixer une hauteur mini sur les navigateurs modernes */
@@ -92,7 +92,7 @@ ul#menuList a:hover {
 #entete #logoGSB {
   float : left;
   width : 238px;
-  height : 152px;
+  height : 154px;
 }
 
 #entete h1 {
@@ -123,18 +123,17 @@ ul#menuList a:hover {
 
 /* Style des formulaires */
 .corpsForm {
-  border : solid 0.1em #000;
-  border-bottom-width:1px;
-  margin-bottom : 0em;
-  width : 95%;
+  width : 100%;
+  background-color : #77AADD;
+  color : white;
 }
 .piedForm {
   border-bottom-width : 0.1em;
   border-left-width : 0.1em;
   border-right-width : 0.1em;
   border-top-width : 0em;
-  border-style : solid;
-  border-color : #000;
+/*   border-style : solid;
+  border-color : #000; */
   text-align:right ;
   width : 95%;
   margin-top:0em;
@@ -189,8 +188,8 @@ taille de caract�res l�g�rement sup�rieure � la normale */
 }
 
 .encadre {
-  border : solid 0.1em #000;
-  width : 80%;
+/*   border : solid 0.1em #000; */
+  width : 100%;
   background-color: #77AADD;
   float:left;
   color:white;
@@ -221,7 +220,7 @@ taille de caract�res l�g�rement sup�rieure � la normale */
 /* Styles pour les tableaux de la page principale */
 #contenu table {
    background-color:#77AADD;
-   border : 0.1em solid #777777;
+/*    border : 0.1em solid #777777; */
    color : white;
    margin-right : auto ;
    margin-left:0.3em;
@@ -235,28 +234,26 @@ taille de caract�res l�g�rement sup�rieure � la normale */
    text-align:left;
    vertical-align:top;
    font-weight:bold;
-   border-bottom:0.1em solid #777777;
+/*    border-bottom:0.1em solid #777777; */
    font-size:1.1em;
 } 
 
 #contenu td {
-   border :1px solid #777777;
+/*    border :1 solid #777777; */
 }
 
 #contenu h3 {
     font-size : 1.2em;
 }
-table.listeLegere {
-	width:80%; 
+table.listeLegere { 
     margin-bottom : 0.5em;
     background-color: #77AADD;
     color : white;
-    
 }
 
 /* Tableaux quadrill�s utilis�s pour l'affichage de listes avec contenu l�ger*/ 
 table.listeLegere th, table.listeLegere td {
-  border : dotted rgb(178,207,81) 0.1em;
+
   padding:0.5em;
   vertical-align : top;
   text-align : left;
@@ -287,11 +284,11 @@ table.listeLegere th.libelle{
 	font-family: Verdana, Arial, Helvetica, sans-serif;
 	font-size: 16px;
 	font-weight: bold;
-	color: #1D2941;
+	color: white;
 	text-decoration: none;
-	border : 1px solid #6988BE;
+/* 	border : 1px solid white; */
 	padding-left: 25px;
-	background-color: #E9F1FE;
+	background-color: #77AADD;
   height : 28px;
 }
 
@@ -314,8 +311,8 @@ table.listeLegere th.libelle{
 .comptable {
 	float:left;
 	width:80%;
-	margin : 10 10 10 10;
-	background-color:EE8844;
+	margin : 10 0 10 20;
+	background-color: #EE8844;
 	color:white;
 	height:100%;
 }
