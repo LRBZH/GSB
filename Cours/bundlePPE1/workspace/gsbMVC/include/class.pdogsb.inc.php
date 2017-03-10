@@ -371,6 +371,31 @@ class PdoGsb{
 		$lesLignes = $res->fetchAll();
 		return $lesLignes;
 	}
+	
+	/**
+	 * Retourne les mois pour lesquel un visiteur a une fiche de frais prête à être mise en paiement
+	 * @param $idVisiteur
+	 * @return un tableau associatif de clé un mois -aaaamm- et de valeurs l'année et le mois correspondant
+	 */
+	public function getLesMoisFacturesValidees($idVisiteur){
+		$req = "select FicheFrais.mois as mois from  FicheFrais where FicheFrais.idVisiteur ='$idVisiteur' and FicheFrais.idEtat = 'CL'
+		order by FicheFrais.mois desc ";
+		$res = PdoGsb::$monPdo->query($req);
+		$lesMois =array();
+		$laLigne = $res->fetch();
+		while($laLigne != null)	{
+			$mois = $laLigne['mois'];
+			$numAnnee =substr( $mois,0,4);
+			$numMois =substr( $mois,4,2);
+			$lesMois["$mois"]=array(
+					"mois"=>"$mois",
+					"numAnnee"  => "$numAnnee",
+					"numMois"  => "$numMois"
+			);
+			$laLigne = $res->fetch();
+		}
+		return $lesMois;
+	}
 	 
 
 }

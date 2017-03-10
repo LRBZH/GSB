@@ -24,8 +24,11 @@ switch($uc){
 	case 'validerFicheFrais' :{
 		include("controleurs/c_validerFicheFrais.php");break; //Comptable
 	}
-	case 'suiviPaiementFicheFrais' :{
-		include("controleurs/c_");break; //Comptable
+	case 'suiviPaiement' :{
+		include("controleurs/c_suiviPaiement.php");break; //Comptable
+	}
+	case 'generationPDF' :{
+		include("controleurs/c_generationPDF.php");break; //Comptable
 	}
 }
 include("vues/v_pied.php") ;
