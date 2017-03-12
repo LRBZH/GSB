@@ -396,6 +396,38 @@ class PdoGsb{
 		}
 		return $lesMois;
 	}
+	
+	//---------------- Gestion PDF -----------------------------
+	
+	/**
+	 * GetLesFraisForfait version allégée pour PDF
+	 */
+	public function getLesFraisForfaitLite($idVisiteur, $mois){
+		$req = "select FraisForfait.libelle as libelle,
+		LigneFraisForfait.quantite as quantite from LigneFraisForfait inner join FraisForfait
+		on FraisForfait.id = LigneFraisForfait.idFraisForfait
+		where LigneFraisForfait.idVisiteur ='$idVisiteur' and LigneFraisForfait.mois='$mois'
+		order by LigneFraisForfait.idFraisForfait";
+		$res = PdoGsb::$monPdo->query($req);
+		$lesLignes = $res->fetchAll();
+		return $lesLignes;
+	}
+	
+	/**
+	 * GetLesFraisHorsForfait version allégée pour PDF
+	 */
+	public function getLesFraisHorsForfaitLite($idVisiteur,$mois){
+		$req = "select libelle, date, montant from LigneFraisHorsForfait where LigneFraisHorsForfait.idVisiteur ='$idVisiteur'
+		and LigneFraisHorsForfait.mois = '$mois' ";
+		$res = PdoGsb::$monPdo->query($req);
+		$lesLignes = $res->fetchAll();
+		$nbLignes = count($lesLignes);
+		for ($i=0; $i<$nbLignes; $i++){
+			$date = $lesLignes[$i]['date'];
+			$lesLignes[$i]['date'] =  dateAnglaisVersFrancais($date);
+		}
+		return $lesLignes;
+	}
 	 
 
 }
