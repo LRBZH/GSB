@@ -434,7 +434,7 @@ class PdoGsb{
 	 */
 	public function getLesFraisHorsForfaitLite($idVisiteur,$mois){
 		$req = "select libelle, date, montant from LigneFraisHorsForfait where LigneFraisHorsForfait.idVisiteur ='$idVisiteur'
-		and LigneFraisHorsForfait.mois = '$mois' ";
+		and LigneFraisHorsForfait.mois = '$mois' AND LigneFraisHorsForfait.libelle not LIKE 'REFUSE%'";
 		$res = PdoGsb::$monPdo->query($req);
 		$lesLignes = $res->fetchAll();
 		$nbLignes = count($lesLignes);
@@ -453,7 +453,7 @@ class PdoGsb{
 	 */
 	public function  getTotalFraisHorsForfait($idVisiteur, $mois){
 		$req = "select SUM(LigneFraisHorsForfait.montant) as total from LigneFraisHorsForfait 
-		where LigneFraisHorsForfait.idVisiteur ='$idVisiteur' and LigneFraisHorsForfait.mois='$mois' ";
+		where LigneFraisHorsForfait.idVisiteur ='$idVisiteur' and LigneFraisHorsForfait.mois='$mois' AND LigneFraisHorsForfait.libelle not LIKE 'REFUSE%'";
 		$res = PdoGsb::$monPdo->query($req);
 		$laLigne = $res->fetch();
 		return $laLigne;

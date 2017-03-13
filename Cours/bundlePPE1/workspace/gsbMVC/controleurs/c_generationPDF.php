@@ -6,6 +6,8 @@ include("vues/v_accueilComptable.php");
 //Variable globales
 $idComptable = $_SESSION['id'];
 $action = $_REQUEST['action'];
+$idVisiteur = $_COOKIE['idVis'];
+$leMois = $_COOKIE['idMois'];
 
 /**
  * Actions reçues de la vue
@@ -15,6 +17,7 @@ if ($action == 'genererPDF'){
 	//Redéfinition de la classe PDF pour gestion de la mise en page 
 	class PDF extends FPDF
 	{
+		
 		// En-tête
 		function Header()
 		{
@@ -40,23 +43,9 @@ if ($action == 'genererPDF'){
 			$this->SetY(-15);
 			// Police Courier italique 8
 			$this->SetFont('Courier','I',8);
-// 			// Numéro de page
-// 			$this->Cell(0,10,'Page '.$this->PageNo().'/{nb}',0,0,'C');
 			// Texte libre
 			$this->Cell(0,10,'Document comptable GSB - Diffusion restreinte',0,0,'C');
 		}
-	
-// 	// Chargement des données
-// 	function LoadData($file)
-// 	{
-// 		// Lecture des lignes du fichier
-// 		$lines = file($file);
-// 		$data = array();
-// 		foreach($lines as $line)
-// 			$data[] = explode(';',trim($line));
-// 			return $data;
-// 	}
-
 	
 	
 	// Tableau infos fraisForfait
@@ -129,15 +118,14 @@ if ($action == 'genererPDF'){
 	
 	//Données visiteur-------------------------	
 	$pdf->ln(10);
-	$leVisiteur=$pdo->getLeVisiteur('f4');
+	$leVisiteur=$pdo->getLeVisiteur($idVisiteur);
 	$nomVisiteur = $leVisiteur['nom'];
 	$prenomVisiteur = $leVisiteur['prenom'];
 	
-	$leMois='2017-02';
 	$numAnnee =substr($leMois,0,4);
-	$numMois =substr($leMois,5,2);
+	$numMois =substr($leMois,4,2);
 	
-	$str1 = $nomVisiteur." ".$prenomVisiteur;
+	$str1 = "Visiteur médical  : ".$nomVisiteur." ".$prenomVisiteur;
 	$str1 = utf8_decode($str1);
 	$str2 = "Fiche de frais de : ".$numMois." - ".$numAnnee;			
 	$str2 = utf8_decode($str2);
@@ -150,11 +138,12 @@ if ($action == 'genererPDF'){
 	 
 	//Tableau données frais forfait----------------------------------------------
 	$headerFraisForfait = array("Frais Forfaitaires", utf8_decode("Quantité"), "Montant unitaire", "Total");
-	$lesFraisForfait= $pdo->getLesFraisForfaitLite('f4','201702');
+	$lesFraisForfait= $pdo->getLesFraisForfaitLite($idVisiteur,$leMois);
 	$pdf->tableauFraisForfait($headerFraisForfait, $lesFraisForfait);
-	$totalFf = $pdo->getTotalFraisForfait('f4', '20170 2');
+	$totalFf = $pdo->getTotalFraisForfait($idVisiteur, $leMois);
 	$pdf->ln(1);
-	$pdf->Cell(30,10,$totalFf,1,1,'L');
+	$pdf->Cell(145,10,'Total forfait',0,0,'L');
+	$pdf->Cell(35,10,$totalFf[0],1,1,'R');
 	$pdf->ln(1);
 	
 	//A la ligne
@@ -164,22 +153,25 @@ if ($action == 'genererPDF'){
 	
 	//Tableau données frais hors forfait------------------------------------
 	$headerFraisHorsForfait = array("Frais", "Date", "Montant");
-	$lesFraisHorsForfait= $pdo->getLesFraisHorsForfaitLite('f4','201702');
+	$lesFraisHorsForfait= $pdo->getLesFraisHorsForfaitLite($idVisiteur,$leMois);
 	$pdf->tableauFraisHorsForfait($headerFraisHorsForfait, $lesFraisHorsForfait);
-	$totalHf = $pdo->getTotalFraisHorsForfait('f4', '20170 2');
+	$totalHf = $pdo->getTotalFraisHorsForfait($idVisiteur, $leMois);
 	$pdf->Ln(1);
-	$pdf->Cell(30,10,$totalHf,1,1,'L');
-	$pdf->ln(1);
-	$totalFicheFrais = $totalFf + $totalHf;
-	$pdf->Cell(30,10,utf8_decode("TOTAL "),1,0,'R');
-	$pdf->Cell(30,10,$totalFicheFrais,1,1,'R');
+	$pdf->Cell(155,10,'Total hors forfait',0,0,'L');
+	$pdf->Cell(25,10,$totalHf[0],1,1,'R');
+	$pdf->ln(10);
+	$totalFicheFrais = number_format($totalFf[0] + $totalHf[0],2);
+	$pdf->Cell(155,10,utf8_decode("TOTAL des frais pour le mois"),1,0,'L');
+	$pdf->Cell(25,10,$totalFicheFrais,1,1,'R');
 
 	
 	$pdf->ln(20);
-		
-	$pdf->Cell(10,10,utf8_decode("Fait à Paris, le : "),0,1,'L');
-	$pdf->Cell(80,10,"Vu l'agent comptable : ",0,1,'L');
-	$pdf->Cell(80,40,"",1,1,'L');
+	$pdf->Cell(110,10,'',0,0,'L');//cellule vide pour mise en page
+	$pdf->Cell(70,10,utf8_decode("Fait à Paris, le : "),0,1,'L');
+	$pdf->Cell(110,10,'',0,0,'L');//cellule vide pour mise en page
+	$pdf->Cell(70,10,"Vu l'agent comptable : ",0,1,'L');
+	$pdf->Cell(110,40,'',0,0,'L');//cellule vide pour mise en page
+	$pdf->Cell(70,40,"",1,1,'L');
 	
 	$pdf->Output();
 
