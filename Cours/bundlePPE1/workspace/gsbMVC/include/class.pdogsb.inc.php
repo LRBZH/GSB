@@ -15,6 +15,8 @@
  * @link       http://www.php.net/manual/fr/book.pdo.php
  */
 
+include ('include/m_constantes.php');
+
 class PdoGsb{   		
       	private static $serveur='mysql:host=localhost';
       	private static $bdd='dbname=gsbV2';   		
@@ -356,8 +358,7 @@ class PdoGsb{
 	public function getLibelleFraisHorsForfaitById($idFrais){
 		$req = "SELECT * FROM LigneFraisHorsForfait where LigneFraisHorsForfait.id ='$idFrais' ";
 		$res = PdoGsb::$monPdo->query($req);
-		$laLigne = $res->fetch();
-		
+		$laLigne = $res->fetch();		
 		return $laLigne;
 	}
 	
@@ -404,13 +405,28 @@ class PdoGsb{
 	 */
 	public function getLesFraisForfaitLite($idVisiteur, $mois){
 		$req = "select FraisForfait.libelle as libelle,
-		LigneFraisForfait.quantite as quantite from LigneFraisForfait inner join FraisForfait
+		LigneFraisForfait.quantite as quantite, FraisForfait.montant as montant, (LigneFraisForfait.quantite * FraisForfait.montant) as total from LigneFraisForfait inner join FraisForfait
 		on FraisForfait.id = LigneFraisForfait.idFraisForfait
 		where LigneFraisForfait.idVisiteur ='$idVisiteur' and LigneFraisForfait.mois='$mois'
 		order by LigneFraisForfait.idFraisForfait";
 		$res = PdoGsb::$monPdo->query($req);
 		$lesLignes = $res->fetchAll();
+		echo "req ok";
 		return $lesLignes;
+	}
+	
+	/**
+	 * Récupération de la somme des frais forfait
+	 * @param $idVisiteur
+	 * @param $mois
+	 */
+	public function getTotalFraisForfait($idVisiteur, $mois){
+		$req = "select SUM(LigneFraisForfait.quantite * FraisForfait.montant) as total from LigneFraisForfait inner join FraisForfait
+		on FraisForfait.id = LigneFraisForfait.idFraisForfait
+		where LigneFraisForfait.idVisiteur ='$idVisiteur' and LigneFraisForfait.mois='$mois' ";
+		$res = PdoGsb::$monPdo->query($req);
+		$laLigne = $res->fetch();
+		return $laLigne;
 	}
 	
 	/**
