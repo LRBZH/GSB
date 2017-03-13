@@ -367,7 +367,7 @@ class PdoGsb{
 	 * @return les différents états possibles
 	 */
 	public function getLesEtats(){ 
-		$req = "SELECT * FROM Etat";
+		$req = "SELECT * FROM Etat ORDER BY ordre";
 		$res = PdoGsb::$monPdo->query($req);
 		$lesLignes = $res->fetchAll();
 		return $lesLignes;
@@ -379,7 +379,7 @@ class PdoGsb{
 	 * @return un tableau associatif de clé un mois -aaaamm- et de valeurs l'année et le mois correspondant
 	 */
 	public function getLesMoisFacturesValidees($idVisiteur){
-		$req = "select FicheFrais.mois as mois from  FicheFrais where FicheFrais.idVisiteur ='$idVisiteur' and FicheFrais.idEtat = 'CL'
+		$req = "select FicheFrais.mois as mois from  FicheFrais where FicheFrais.idVisiteur ='$idVisiteur' and FicheFrais.idEtat = 'VA'
 		order by FicheFrais.mois desc ";
 		$res = PdoGsb::$monPdo->query($req);
 		$lesMois =array();
@@ -443,6 +443,20 @@ class PdoGsb{
 			$lesLignes[$i]['date'] =  dateAnglaisVersFrancais($date);
 		}
 		return $lesLignes;
+	}
+	
+	
+	/**
+	 * Récupération de la somme des frais hors forfait
+	 * @param $idVisiteur
+	 * @param $mois
+	 */
+	public function  getTotalFraisHorsForfait($idVisiteur, $mois){
+		$req = "select SUM(LigneFraisHorsForfait.montant) as total from LigneFraisHorsForfait 
+		where LigneFraisHorsForfait.idVisiteur ='$idVisiteur' and LigneFraisHorsForfait.mois='$mois' ";
+		$res = PdoGsb::$monPdo->query($req);
+		$laLigne = $res->fetch();
+		return $laLigne;
 	}
 	 
 

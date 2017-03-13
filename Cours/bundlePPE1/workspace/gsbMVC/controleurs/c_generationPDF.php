@@ -46,16 +46,16 @@ if ($action == 'genererPDF'){
 			$this->Cell(0,10,'Document comptable GSB - Diffusion restreinte',0,0,'C');
 		}
 	
-	// Chargement des données
-	function LoadData($file)
-	{
-		// Lecture des lignes du fichier
-		$lines = file($file);
-		$data = array();
-		foreach($lines as $line)
-			$data[] = explode(';',trim($line));
-			return $data;
-	}
+// 	// Chargement des données
+// 	function LoadData($file)
+// 	{
+// 		// Lecture des lignes du fichier
+// 		$lines = file($file);
+// 		$data = array();
+// 		foreach($lines as $line)
+// 			$data[] = explode(';',trim($line));
+// 			return $data;
+// 	}
 
 	
 	
@@ -152,7 +152,7 @@ if ($action == 'genererPDF'){
 	$headerFraisForfait = array("Frais Forfaitaires", utf8_decode("Quantité"), "Montant unitaire", "Total");
 	$lesFraisForfait= $pdo->getLesFraisForfaitLite('f4','201702');
 	$pdf->tableauFraisForfait($headerFraisForfait, $lesFraisForfait);
-	$totalFf = $pdo->getTotalFraisForfait('f4', '201702');
+	$totalFf = $pdo->getTotalFraisForfait('f4', '20170 2');
 	$pdf->ln(1);
 	$pdf->Cell(30,10,$totalFf,1,1,'L');
 	$pdf->ln(1);
@@ -166,9 +166,13 @@ if ($action == 'genererPDF'){
 	$headerFraisHorsForfait = array("Frais", "Date", "Montant");
 	$lesFraisHorsForfait= $pdo->getLesFraisHorsForfaitLite('f4','201702');
 	$pdf->tableauFraisHorsForfait($headerFraisHorsForfait, $lesFraisHorsForfait);
+	$totalHf = $pdo->getTotalFraisHorsForfait('f4', '20170 2');
 	$pdf->Ln(1);
-	
-	$pdf->Cell(30,10,utf8_decode("TOTAL "),1,1,'R');
+	$pdf->Cell(30,10,$totalHf,1,1,'L');
+	$pdf->ln(1);
+	$totalFicheFrais = $totalFf + $totalHf;
+	$pdf->Cell(30,10,utf8_decode("TOTAL "),1,0,'R');
+	$pdf->Cell(30,10,$totalFicheFrais,1,1,'R');
 
 	
 	$pdf->ln(20);
