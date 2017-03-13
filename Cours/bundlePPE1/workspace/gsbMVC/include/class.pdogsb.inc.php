@@ -427,7 +427,7 @@ class PdoGsb{
 		$res = PdoGsb::$monPdo->query($req);
 		$laLigne = $res->fetch();
 		return $laLigne;
-	}
+	} 
 	
 	/**
 	 * GetLesFraisHorsForfait version allégée pour PDF

@@ -147,7 +147,7 @@ if ($action == 'genererPDF'){
 	
 	//A la ligne
 	$pdf->Ln(10);
-	
+	 
 	//Tableau données frais forfait----------------------------------------------
 	$headerFraisForfait = array("Frais Forfaitaires", utf8_decode("Quantité"), "Montant unitaire", "Total");
 	$lesFraisForfait= $pdo->getLesFraisForfaitLite('f4','201702');
