@@ -20,18 +20,22 @@ switch($action){
 			include("vues/v_connexion.php");
 		}
 		elseif (is_array($visiteur)){
+			$choix="visiteur"; //pour la couleur de la page d'accueil
 			$id = $visiteur['id'];
 			$nom =  $visiteur['nom'];
 			$prenom = $visiteur['prenom'];
 			connecter($id,$nom,$prenom);
 			include("vues/v_sommaire.php");
+			include("vues/v_accueil.php");
 		}
 		elseif (is_array($comptable)){
+			$choix="comptable"; //pour la couleur de la page d'accueil
 			$id = $comptable['id'];
 			$nom =  $comptable['nom'];
 			$prenom = $comptable['prenom'];
 			connecter($id,$nom,$prenom);
 			include("vues/v_accueilComptable.php");
+			include("vues/v_accueil.php");
 		}
 		break;
 	}

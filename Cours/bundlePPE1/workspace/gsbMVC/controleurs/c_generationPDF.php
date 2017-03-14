@@ -17,7 +17,11 @@ if ($action == 'genererPDF'){
 	//Redéfinition de la classe PDF pour gestion de la mise en page 
 	class PDF extends FPDF
 	{
-		
+		/**
+		 * Fonction dde création du header du PDF (style, titre, etc...)
+		 * {@inheritDoc}
+		 * @see FPDF::Header()
+		 */
 		// En-tête
 		function Header()
 		{
@@ -36,7 +40,11 @@ if ($action == 'genererPDF'){
 			$this->Ln(20);
 		}
 		
-		// Pied de page
+		/**
+		 * Fonction de création du footer du PDF
+		 * {@inheritDoc}
+		 * @see FPDF::Footer()
+		 */
 		function Footer()
 		{
 			// Positionnement à 1,5 cm du bas
@@ -47,8 +55,9 @@ if ($action == 'genererPDF'){
 			$this->Cell(0,10,'Document comptable GSB - Diffusion restreinte',0,0,'C');
 		}
 	
-	
-	// Tableau infos fraisForfait
+	/**
+	 * Création du tablea pour les frais forfait (mise en page et style)
+	 */
 	function tableauFraisForfait($header, $data)
 	{
  		// En-tête
@@ -79,7 +88,9 @@ if ($action == 'genererPDF'){
 		$this->Cell(array_sum($w),0,'','T');
 	}
 	
-	// Tableau infos fraisHorsForfait
+	/**
+	 * Création du tablea pour les frais hors forfait (mise en page et style)
+	 */
 	function tableauFraisHorsForfait($header, $data)
 	{
 		// En-tête
@@ -164,7 +175,7 @@ if ($action == 'genererPDF'){
 	$pdf->Cell(155,10,utf8_decode("TOTAL des frais pour le mois"),1,0,'L');
 	$pdf->Cell(25,10,$totalFicheFrais,1,1,'R');
 
-	
+	//Fin de page et signature du comptable----------------------------------
 	$pdf->ln(20);
 	$pdf->Cell(110,10,'',0,0,'L');//cellule vide pour mise en page
 	$pdf->Cell(70,10,utf8_decode("Fait à Paris, le : "),0,1,'L');
